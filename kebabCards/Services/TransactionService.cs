@@ -33,7 +33,8 @@ namespace kebabCards.Services
 
         public List<Transaction> GetTodayTransactionsForUser(string userId)
         {
-            var transactions =  _context.Transactions.Where(t => t.UserId == userId && t.TransactionTime > DateTime.Now.AddDays(-1)).ToList();
+            var t = _context.Transactions.ToList();
+            var transactions =  _context.Transactions.Where(t => t.UserId == userId && t.TransactionTime > DateTime.UtcNow.AddDays(-1)).ToList();
             return transactions.OrderByDescending(t => t.TransactionTime).ToList();
         }
 
@@ -109,7 +110,7 @@ namespace kebabCards.Services
             {
                 UserId = user.Id,
                 UserName = user.Name,
-                TransactionTime = DateTime.Now,
+                TransactionTime = DateTime.UtcNow,
                 CardId = customer.CardId,
                 Points = points,
                 ProductNames = string.Join(",", productNames),

@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultDbConnection"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultDbConnection"));
 });
 builder.Services.AddIdentity<User,IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllers();
@@ -71,10 +71,11 @@ builder.Services.AddAuthentication(o =>
 });
 builder.Services.AddCors();
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
+
 var app = builder.Build();
 app.UseSwagger();
-// Configure the HTTP request pipeline.
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwaggerUI();
