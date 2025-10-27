@@ -51,6 +51,7 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<ICustomerService, CustomerService>();
 builder.Services.AddTransient<ITransactionSerivce, TransactionService>();
+builder.Services.AddTransient<IAuthService, AuthService>();
 
 var key = builder.Configuration.GetValue<string>("ApiSettings:Secret");
 builder.Services.AddAuthentication(o =>
