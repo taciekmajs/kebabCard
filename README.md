@@ -5,5 +5,5 @@ Make sure your `appsettings.json` file contains a valid PostgreSQL connection st
 Once You run API it's possible to test app with Swagger or client app.  
 When running the project locally for the first time, a **default admin account** will be created automatically by the database seeder.  
 Login: admin  
-Password Admin123!  
+Password: Admin123!  
 
